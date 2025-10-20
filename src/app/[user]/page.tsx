@@ -3,10 +3,25 @@
 import LinkItem from "@/components/LinkItem"
 import SocialIcon from "@/components/SocialIcon"
 import Dialog from "../../components/Dialog"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import axios from "axios"
+import { useParams } from "next/navigation"
 
-const User = () => {
+const User = ({ params:any }) => {
+    const {user} = useParams()
     const [dialogOpen, setDialogOpen] = useState(false)
+    const [userData, setUserData] = useState([])
+    useEffect(() => {
+        getUser()
+    }, [])
+    const getUser = () => {
+        axios.get(`http://localhost:8080/linktree-api/v1/user/${user}`).then((res) => {
+            setUserData(res.data.data)
+            console.log(res.data)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
     return (
         <>
             <Dialog
