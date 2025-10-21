@@ -6,11 +6,14 @@ import Dialog from "../../components/Dialog"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { useParams } from "next/navigation"
+import { UserDataType } from "@/interfaces/userData"
 
-const User = ({ params:any }) => {
-    const {user} = useParams()
+
+
+const User = () => {
+    const { user } = useParams()
     const [dialogOpen, setDialogOpen] = useState(false)
-    const [userData, setUserData] = useState([])
+    const [userData, setUserData] = useState<UserDataType>()
     useEffect(() => {
         getUser()
     }, [])
@@ -48,16 +51,14 @@ const User = ({ params:any }) => {
                             {/* <img src="" alt="" /> */}
 
                         </div>
-                        <span className="font-semibold text-[1.5rem]">Honey Pastry</span>
-                        <span className="text-[14px] md:text-base">Good pastry for a good day</span>
+                        <span className="font-semibold text-[1.5rem]">{userData?.name}</span>
+                        <span className="text-[14px] md:text-base">{userData?.about}</span>
                     </div>
 
                     <div className="LINKS flex flex-col items-center mt-[7%] gap-4 mb-[7%]">
-                        <LinkItem />
-                        <LinkItem />
-                        <LinkItem />
-                        <LinkItem />
-                        <LinkItem />
+                        {userData?.links.map((link, index) => (
+                            <LinkItem key={index} id={link.id} title={link.title} url={link.url}/>
+                        ))}
                     </div>
 
                     <div className="SOCIALS flex flex-wrap items-center justify-center gap-2">
