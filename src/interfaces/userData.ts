@@ -5,6 +5,7 @@ export interface SocialsType {
 
 export interface LinksType {
   id?: string;
+  imageUrl: string;
   title: string;
   url: string;
   position?: number;
