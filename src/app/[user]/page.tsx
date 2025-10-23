@@ -39,7 +39,7 @@ const User = () => {
             </Dialog>
             <div className="bg-[#BCB8AF] min-h-screen flex justify-center w-full text-blue-500 no-scrollbar">
 
-                <div className="mt-[3%] text-base rounded-[2rem] bg-[#DDDBDC] min-h-[85vh] w-screen md:w-[60%] lg:w-[45%] p-7">
+                <div className="mt-[3%] text-base rounded-[2rem] bg-[#DDDBDC] min-h-[85vh] w-screen md:w-[60%] lg:w-[40%] p-7">
 
                     <div className="AUTHSHARE flex justify-between w-full h-[2rem] mb-[4%]">
                         <div className="bg-white/70 rounded-full w-[2.5rem] h-[2.5rem] flex items-center justify-center cursor-pointer hover:bg-white active:bg-white" onClick={() => setDialogOpen(true)}>
