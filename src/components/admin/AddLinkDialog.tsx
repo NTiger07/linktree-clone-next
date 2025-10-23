@@ -35,7 +35,7 @@ export const AddLinkDialog = ({ onAdd }: AddLinkDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="w-full bg-gradient-primary hover:opacity-90 transition-opacity shadow-elegant">
+        <Button className="w-full cursor-pointer bg-gradient-primary">
           <Plus className="mr-2 h-4 w-4" />
           Add New Link
         </Button>

@@ -63,7 +63,7 @@ const User = () => {
                     </div>
                     <div className="LINKS flex flex-col items-center mt-[7%] gap-4 mb-[7%]">
                         {userData?.links.map((link, index) => (
-                            <LinkItem key={index} id={link.id} imageUrl={link.imageUrl} title={link.title} url={link.url} />
+                            <LinkItem key={index} id={link.id} imageUrl={link.imageUrl} title={link.title} url={link.url} isActive={link.isActive} />
                         ))}
                     </div>
 
