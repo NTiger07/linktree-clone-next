@@ -5,8 +5,10 @@ import { Switch } from "@/components/ui/switch";
 
 interface LinkCardProps {
   id: string;
+  imageUrl: string;
   title: string;
   url: string;
+  position?: number;
   isActive: boolean;
   onToggle: (id: string) => void;
   onEdit: (id: string) => void;
@@ -15,8 +17,10 @@ interface LinkCardProps {
 
 export const LinkCard = ({
   id,
+  imageUrl,
   title,
   url,
+  position,
   isActive,
   onToggle,
   onEdit,

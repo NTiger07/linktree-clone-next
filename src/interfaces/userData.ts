@@ -9,6 +9,7 @@ export interface LinksType {
   title: string;
   url: string;
   position?: number;
+  isActive: boolean;
 }
 
 export interface UserDataType {

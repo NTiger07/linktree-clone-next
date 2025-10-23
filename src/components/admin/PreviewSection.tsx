@@ -2,19 +2,14 @@ import { ExternalLink, User } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { LinksType } from "@/interfaces/userData";
 
-interface Link {
-  id: string;
-  title: string;
-  url: string;
-  isActive: boolean;
-}
 
 interface PreviewSectionProps {
   username: string;
   bio: string;
   avatarUrl?: string;
-  links: Link[];
+  links: LinksType[];
 }
 
 export const PreviewSection = ({ username, bio, avatarUrl, links }: PreviewSectionProps) => {

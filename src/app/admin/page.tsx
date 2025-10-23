@@ -5,45 +5,47 @@ import { LinkCard } from "@/components/admin/LinkCard";
 import { AddLinkDialog } from "@/components/admin/AddLinkDialog";
 import { ProfileSection } from "@/components/admin/ProfileSection";
 import { PreviewSection } from "@/components/admin/PreviewSection";
-import { StatsCards } from "@/components/admin/StatsCards";
 import { toast } from "@/hooks/use-toast";
+import { LinksType } from "@/interfaces/userData";
 
-interface Link {
-    id: string;
-    title: string;
-    url: string;
-    isActive: boolean;
-}
 
 const Admin = () => {
     const [username, setUsername] = useState("yourname");
     const [bio, setBio] = useState("Welcome to my page! 🚀");
-    const [links, setLinks] = useState<Link[]>([
+    const [links, setLinks] = useState<LinksType[]>([
         {
             id: "1",
+            imageUrl: "",
             title: "My Portfolio",
             url: "https://example.com/portfolio",
+            position: 1,
             isActive: true,
         },
         {
             id: "2",
+            imageUrl: "",
             title: "GitHub Profile",
             url: "https://github.com/username",
+            position: 2,
             isActive: true,
         },
         {
             id: "3",
+            imageUrl: "",
             title: "Blog",
             url: "https://example.com/blog",
+            position: 3,
             isActive: false,
         },
     ]);
 
-    const handleAddLink = (title: string, url: string) => {
-        const newLink: Link = {
+    const handleAddLink = (title: string, url: string,) => {
+        const newLink: LinksType = {
             id: Date.now().toString(),
+            imageUrl: "https://vwzciaaeijiwhnvlfzni.supabase.co/storage/v1/object/public/user-avatars/link-images/link-default.png",
             title,
             url,
+            position: links.length + 1,
             isActive: true,
         };
         setLinks([...links, newLink]);
@@ -102,10 +104,6 @@ const Admin = () => {
 
             {/* Main Content */}
             <main className="container mx-auto px-4 py-8">
-                {/* Stats */}
-                <div className="mb-8 animate-fade-in">
-                    <StatsCards />
-                </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Left Column - Profile & Links */}
@@ -132,7 +130,12 @@ const Admin = () => {
                                 {links.map((link) => (
                                     <LinkCard
                                         key={link.id}
-                                        {...link}
+                                        id={link.id!}
+                                        imageUrl={link.imageUrl}
+                                        title={link.title}
+                                        url={link.url}
+                                        position={link.position}
+                                        isActive={link.isActive}
                                         onToggle={handleToggleLink}
                                         onEdit={handleEditLink}
                                         onDelete={handleDeleteLink}
