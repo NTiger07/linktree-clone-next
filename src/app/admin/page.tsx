@@ -1,11 +1,11 @@
 "use client"
 
 import { useState } from "react";
-import { LinkCard } from "@/components/LinkCard";
-import { AddLinkDialog } from "@/components/AddLinkDialog";
-import { ProfileSection } from "@/components/ProfileSection";
-import { PreviewSection } from "@/components/PreviewSection";
-import { StatsCards } from "@/components/StatsCards";
+import { LinkCard } from "@/components/admin/LinkCard";
+import { AddLinkDialog } from "@/components/admin/AddLinkDialog";
+import { ProfileSection } from "@/components/admin/ProfileSection";
+import { PreviewSection } from "@/components/admin/PreviewSection";
+import { StatsCards } from "@/components/admin/StatsCards";
 import { toast } from "@/hooks/use-toast";
 
 interface Link {

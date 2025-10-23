@@ -1,9 +1,9 @@
 "use client"
 
 import Image from "next/image"
-import LinkItem from "@/components/LinkItem"
-import SocialIcon from "@/components/SocialIcon"
-import Dialog from "../../components/Dialog"
+import LinkItem from "@/components/user/LinkItem"
+import SocialIcon from "@/components/user/SocialIcon"
+import Dialog from "@/components/user/Dialog"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { useParams } from "next/navigation"
