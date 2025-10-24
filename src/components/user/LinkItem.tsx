@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import Dialog from "./Dialog"
+import Dialog from "../Dialog"
 import { FC, useState } from "react"
 import { LinksType } from "@/interfaces/userData"
 

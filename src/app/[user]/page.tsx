@@ -3,7 +3,7 @@
 import Image from "next/image"
 import LinkItem from "@/components/user/LinkItem"
 import SocialIcon from "@/components/user/SocialIcon"
-import Dialog from "@/components/user/Dialog"
+import Dialog from "@/components/Dialog"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { useParams } from "next/navigation"
@@ -69,7 +69,8 @@ const User = () => {
 
                     <div className="SOCIALS flex flex-wrap items-center justify-center gap-2">
                         {userData?.socials.map((social, index) => (
-                            <SocialIcon key={index} platform={social.platform} url={social.url} />
+                            // <SocialIcon key={index} platform={social.platform} url={social.url} />
+                            <SocialIcon key={index} />
                         ))}
                     </div>
                 </div>

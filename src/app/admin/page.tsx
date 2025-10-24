@@ -3,15 +3,42 @@
 import Image from "next/image"
 import { useState } from "react";
 import { LinkCard } from "@/components/admin/LinkCard";
-import { AddLinkDialog } from "@/components/admin/AddLinkDialog";
 import { PreviewSection } from "@/components/admin/PreviewSection";
-import { toast } from "@/hooks/use-toast";
 import { LinksType } from "@/interfaces/userData";
+import Dialog from "@/components/Dialog";
+import SocialIcon from "@/components/admin/SocialIcon";
+import AddLink from "@/components/admin/AddLink";
+import AddSocial from "@/components/admin/AddSocial";
+import EditLink from "@/components/admin/EditLink";
+import EditSocial from "@/components/admin/EditSocial";
 
 
 const Admin = () => {
+    const [dialogState, setDialogState] = useState({
+        isOpen: false,
+        title: "",
+        child: <></>
+    })
+
+    const toggleAddLink = () => {
+        setDialogState({
+            isOpen: true,
+            title: "Add Link",
+            child: <AddLink />
+        })
+    }
+
+    const toggleAddSocial = () => {
+        setDialogState({
+            isOpen: true,
+            title: "Add Social",
+            child: <AddSocial />
+        })
+    }
+
     const [username, setUsername] = useState("yourname");
     const [bio, setBio] = useState("Welcome to my page! 🚀");
+
     const [links, setLinks] = useState<LinksType[]>([
         {
             id: "1",
@@ -49,10 +76,6 @@ const Admin = () => {
             isActive: true,
         };
         setLinks([...links, newLink]);
-        toast({
-            title: "Link added",
-            description: "Your new link has been added successfully.",
-        });
     };
 
     const handleToggleLink = (id: string) => {
@@ -64,131 +87,151 @@ const Admin = () => {
     };
 
     const handleEditLink = (id: string) => {
-        toast({
-            title: "Edit feature",
-            description: "Edit functionality coming soon!",
-        });
+        setDialogState({
+            isOpen: true,
+            title: "Edit Link",
+            child: <EditLink id={id} />
+        })
     };
 
     const handleDeleteLink = (id: string) => {
         setLinks(links.filter((link) => link.id !== id));
-        toast({
-            title: "Link deleted",
-            description: "The link has been removed from your page.",
-            variant: "destructive",
-        });
     };
 
     const handleAvatarChange = () => {
-        toast({
-            title: "Upload feature",
-            description: "Avatar upload coming soon!",
-        });
     };
 
     return (
-        <div className="min-h-screen bg-[#F1F0EE]">
-            <header className="sticky top-0 z-10 p-5 bg-[#F1F0EE] text-[1.5rem] font-bold border-b border-b-gray-200 mb-[2%]">
-                Edit Profile and Add Links
-            </header>
+        <>
+            <Dialog
+                open={dialogState.isOpen}
+                onOpenChange={() => setDialogState({ ...dialogState, isOpen: false })}
+                title={dialogState.title}
+                size="lg"
+                className="bg-white"
+            >
+                {dialogState.child}
+            </Dialog>
+
+            <div className="min-h-screen bg-[#F1F0EE]">
+                <header className="sticky top-0 z-10 p-5 bg-[#F1F0EE] text-[1.5rem] font-bold border-b border-b-gray-200 mb-[2%]">
+                    Edit Profile and Add Links
+                </header>
 
 
 
 
-            <main className="px-[5%] flex justify-between w-full">
+                <main className="px-[5%] flex justify-between w-full">
 
-                <div className="w-[50%]">
-                    <div className="PROFILEADD flex flex-col gap-3 mb-[4%]">
-                        <div className="PROFILE flex items-center gap-2.5">
-                            <div className="bg-black rounded-full w-[64px] h-[64px]">
-                                <Image
-                                    src=""
-                                    alt=""
-                                    width={64}
-                                    height={64}
-                                    className="rounded-full"
-                                />
-                            </div>
-                            <div className="flex flex-col gap-1">
-                                <span className="font-bold hover:underline cursor-pointer text-[1.2rem]">Favour Olaleru</span>
-                                <span className="text-gray-600 hover:underline cursor-pointer text-sm">Software Engineer and Technical Writer</span>
-                                <div>
-                                    {/* MAP SOCIALS */}
-                                    <span className="cursor-pointer w-fit flex items-center justify-center rounded-full border border-gray-200 bg-transparent hover:bg-white p-2">
-                                        <Image
-                                            src="/icons/plus-dark.svg"
-                                            alt=""
-                                            width={7}
-                                            height={7}
-                                            className="rounded-full"
-                                        />
-                                    </span>
+                    <div className="w-[50%]">
+                        <div className="PROFILEADD flex flex-col gap-3 mb-[4%]">
+                            <div className="PROFILE flex items-center gap-2.5">
+                                <div className="bg-black rounded-full w-[64px] h-[64px]">
+                                    <Image
+                                        src=""
+                                        alt=""
+                                        width={64}
+                                        height={64}
+                                        className="rounded-full"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-1">
+                                    <span className="font-bold hover:underline cursor-pointer text-[1.2rem]">Favour Olaleru</span>
+                                    <span className="text-gray-600 hover:underline cursor-pointer text-sm">Software Engineer and Technical Writer</span>
+                                    <div className="flex items-center gap-2">
+                                        {/* MAP SOCIALS */}
+
+                                        <SocialIcon />
+                                        <SocialIcon />
+                                        <SocialIcon />
+
+                                        <span className="cursor-pointer w-fit flex items-center justify-center rounded-full border border-gray-200 bg-transparent hover:bg-white p-2" onClick={toggleAddSocial}>
+                                            <Image
+                                                src="/icons/plus-dark.svg"
+                                                alt=""
+                                                width={7}
+                                                height={7}
+                                                className="rounded-full"
+                                            />
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="ADDBUTTON w-full">
-                            <button className="border-none outline-none cursor-pointer text-white flex items-center gap-2.5 bg-purple-600 hover:bg-purple-950 rounded-full w-full p-3 font-bold justify-center">
-                                <Image
-                                    src="/icons/plus.svg"
-                                    alt=""
-                                    width={16}
-                                    height={16}
-                                    className="rounded-full"
-                                />
-                                Add
-                            </button>
-                        </div>
-
-                    </div>
-                    <div className="LINKS">
-                        <div className="animate-fade-in" style={{ animationDelay: "0.2s" }}>
-                            <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-xl font-bold text-foreground">Your Links</h2>
-                                <span className="text-sm text-muted-foreground">
-                                    {links.filter((l) => l.isActive).length} active
-                                </span>
-                            </div>
-
-                            <div className="space-y-3 mb-4">
-                                {links.map((link) => (
-                                    <LinkCard
-                                        key={link.id}
-                                        id={link.id!}
-                                        imageUrl={link.imageUrl}
-                                        title={link.title}
-                                        url={link.url}
-                                        position={link.position}
-                                        isActive={link.isActive}
-                                        onToggle={handleToggleLink}
-                                        onEdit={handleEditLink}
-                                        onDelete={handleDeleteLink}
+                            <div className="ADDBUTTON w-full">
+                                <button className="border-none outline-none cursor-pointer text-white flex items-center gap-2.5 bg-purple-600 hover:bg-purple-950 rounded-full w-full p-3 font-bold justify-center" onClick={toggleAddLink}>
+                                    <Image
+                                        src="/icons/plus.svg"
+                                        alt=""
+                                        width={16}
+                                        height={16}
+                                        className="rounded-full"
                                     />
-                                ))}
+                                    Add
+                                </button>
                             </div>
 
-                            <AddLinkDialog onAdd={handleAddLink} />
+                        </div>
+                        <div className="LINKS">
+                            <div className="animate-fade-in" style={{ animationDelay: "0.2s" }}>
+                                <div className="flex items-center justify-between mb-4">
+                                    <h2 className="text-xl font-bold text-foreground">Links</h2>
+                                    <span className="text-sm text-muted-foreground">
+                                        {links.filter((l) => l.isActive).length} active
+                                    </span>
+                                </div>
+
+                                <div className="space-y-3 mb-4">
+                                    {links.map((link) => (
+                                        <LinkCard
+                                            key={link.id}
+                                            id={link.id!}
+                                            imageUrl={link.imageUrl}
+                                            title={link.title}
+                                            url={link.url}
+                                            position={link.position}
+                                            isActive={link.isActive}
+                                            onToggle={handleToggleLink}
+                                            onEdit={handleEditLink}
+                                            onDelete={handleDeleteLink}
+                                        />
+                                    ))}
+                                </div>
+
+                                <span className="flex items-center gap-2 font-bold cursor-pointer justify-center mt-[4%]" onClick={toggleAddLink}>
+                                    <Image
+                                        src="/icons/plus-dark.svg"
+                                        alt=""
+                                        width={16}
+                                        height={16}
+                                        className="rounded-full"
+                                    />
+                                    Add New Link
+                                </span>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                
 
-                <div className="PREVIEW w-[30%]">
-                    <div className="animate-fade-in" style={{ animationDelay: "0.3s" }}>
-                        <PreviewSection
-                            username={username}
-                            bio={bio}
-                            links={links}
-                        />
+
+                    <div className="PREVIEW w-[30%]">
+                        <div className="animate-fade-in" style={{ animationDelay: "0.3s" }}>
+                            <PreviewSection
+                                username={username}
+                                bio={bio}
+                                links={links}
+                            />
+                        </div>
                     </div>
-                </div>
 
 
-                
 
 
-            </main>
-        </div>
+
+                </main>
+            </div>
+        </>
+
     );
 };
 
